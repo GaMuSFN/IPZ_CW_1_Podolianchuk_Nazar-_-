@@ -67,12 +67,6 @@ fun SignInScreen() {
             text = "Result: $result",
             style = MaterialTheme.typography.bodyMedium
         )
-        TextField(
-            value = "",
-            onValueChange = {},
-            readOnly = true,
-            modifier = Modifier.fillMaxWidth()
-        )
         Button(
             onClick = {
                 if (email.isEmpty() && password.isEmpty()) {
