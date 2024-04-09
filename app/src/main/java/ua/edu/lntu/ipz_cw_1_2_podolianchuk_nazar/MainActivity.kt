@@ -3,13 +3,12 @@ package ua.edu.lntu.ipz_cw_1_2_podolianchuk_nazar
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import ua.edu.lntu.ipz_cw_1_2_podolianchuk_nazar.ui.theme.IPZ_CW_1_2_Podolianchuk_NazarTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,12 +16,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             IPZ_CW_1_2_Podolianchuk_NazarTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    SignInScreen()
                 }
             }
         }
@@ -30,17 +28,50 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun SignInScreen() {
+    Column(
+        modifier = Modifier.padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Text(
+            text = "Sign In",
+            style = MaterialTheme.typography.bodyLarge
+        )
+        OutlinedTextField(
+            value = "",
+            onValueChange = {},
+            label = { Text("Email") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(
+            value = "",
+            onValueChange = {},
+            label = { Text("Password") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        Text(
+            text = "Result:",
+            style = MaterialTheme.typography.bodyMedium
+        )
+        TextField(
+            value = "",
+            onValueChange = {},
+            readOnly = true,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Button(
+            onClick = { /* Handle sign in */ },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(text = "Sign In")
+        }
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun SignInPreview() {
     IPZ_CW_1_2_Podolianchuk_NazarTheme {
-        Greeting("Android")
+        SignInScreen()
     }
 }
