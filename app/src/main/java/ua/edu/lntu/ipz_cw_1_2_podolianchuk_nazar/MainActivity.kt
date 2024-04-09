@@ -36,6 +36,7 @@ fun SignInScreen() {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var result by remember { mutableStateOf("") }
+    var isFirstLaunch by remember { mutableStateOf(true) }
 
     Column(
         modifier = Modifier.padding(16.dp),
@@ -49,7 +50,7 @@ fun SignInScreen() {
             value = email,
             onValueChange = { email = it },
             label = { Text("Email") },
-            isError = email.isEmpty(),
+            isError = isFirstLaunch && email.isEmpty(),
             singleLine = true,
             modifier = Modifier.fillMaxWidth()
         )
@@ -58,7 +59,7 @@ fun SignInScreen() {
             value = password,
             onValueChange = { password = it },
             label = { Text("Password") },
-            isError = password.isEmpty(),
+            isError = isFirstLaunch && password.isEmpty(),
             singleLine = true,
             modifier = Modifier.fillMaxWidth()
         )
@@ -73,7 +74,17 @@ fun SignInScreen() {
             modifier = Modifier.fillMaxWidth()
         )
         Button(
-            onClick = { /* Handle sign in */ },
+            onClick = {
+                if (email.isEmpty() && password.isEmpty()) {
+                    result = "Введіть пошту та пароль"
+                } else if (email.isEmpty()) {
+                    result = "Пошта не введена"
+                } else if (password.isEmpty()) {
+                    result = "Пароль не введений"
+                } else {
+                    result = "Успішна авторизація"
+                }
+            },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(text = "Sign In")
