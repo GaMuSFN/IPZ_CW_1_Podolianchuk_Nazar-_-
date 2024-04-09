@@ -6,6 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -29,6 +33,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun SignInScreen() {
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var result by remember { mutableStateOf("") }
+
     Column(
         modifier = Modifier.padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -38,19 +46,24 @@ fun SignInScreen() {
             style = MaterialTheme.typography.bodyLarge
         )
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = email,
+            onValueChange = { email = it },
             label = { Text("Email") },
+            isError = email.isEmpty(),
+            singleLine = true,
             modifier = Modifier.fillMaxWidth()
         )
+
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = password,
+            onValueChange = { password = it },
             label = { Text("Password") },
+            isError = password.isEmpty(),
+            singleLine = true,
             modifier = Modifier.fillMaxWidth()
         )
         Text(
-            text = "Result:",
+            text = "Result: $result",
             style = MaterialTheme.typography.bodyMedium
         )
         TextField(
